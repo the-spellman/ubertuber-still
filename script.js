@@ -7,6 +7,10 @@ document.getElementById('search-button').addEventListener('click', async () => {
         alert('Please enter a search query.');
         return;
     }
+    function getRandomHex() {
+        const randomNumber = Math.floor(Math.random() * 0xFFFF); // Generates a number between 0 and 65535
+        return randomNumber.toString(16).padStart(4, '0'); // Converts to hex and pads to ensure it's 4 digits
+    }
 
     try {
         const response = await fetch(`https://ubertuberbe.nodemixaholic.com/search?q=${encodeURIComponent(query)}`);
@@ -34,7 +38,7 @@ document.getElementById('search-button').addEventListener('click', async () => {
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                a.download = `${e.target.dataset.title}.webm`; // You might want to set this dynamically
+                a.download = `${getRandomHex}.webm`; // You might want to set this dynamically
                 document.body.appendChild(a);
                 window.URL.revokeObjectURL(url);
             });
